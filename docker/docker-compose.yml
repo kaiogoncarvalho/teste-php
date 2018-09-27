@@ -1,0 +1,44 @@
+version: '3'
+networks:
+  vector_network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      -
+        subnet: 172.85.1.0/24
+services:
+  php:
+    stdin_open: true
+    tty: true
+    container_name: vector_php
+    volumes:
+      - $DIR:/var/www
+    image: kaiocarvalhopravaler/php:7.2-apache
+    environment:
+      - SITE_HOST=localhost.desenv
+      - SITE_DOCUMENT_ROOT=/var/www/public
+      - VOLUME=/var/www
+      - CONTAINER=vector_php
+      - REMOTE_HOST=$HOST_IP
+    networks:
+      vector_network:
+        ipv4_address: 172.85.1.2
+  mysql:
+    stdin_open: true
+    tty: true
+    container_name: vector_mysql
+    image: mysql:5.7
+    volumes:
+      - $DIR_MYSQL:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_DATABASE=mysql
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=123456
+      - MYSQL_ROOT_HOST=%
+    networks:
+      vector_network:
+        ipv4_address: 172.85.1.3
+    expose:
+      - '3306'
