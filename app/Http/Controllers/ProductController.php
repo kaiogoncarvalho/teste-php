@@ -25,4 +25,18 @@ class ProductController extends Controller
     {
         return view('product.home');
     }
+
+    /**
+     * Retorna view para criar produto
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
+     * @author Kaio Gonçalves Carvalho <kaio.carvalho@pravaler.com.br>
+     * @since 27/09/2018
+     *
+     */
+    public function showCreate()
+    {
+        return view('product.new_edit');
+    }
 }

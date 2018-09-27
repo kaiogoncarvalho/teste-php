@@ -8,6 +8,7 @@ $(document).ready(function() {
         badDate: 'Informe uma data válida (DD/MM/AAAA)',
         lengthTooLongStart : 'O valor do campo não deve ser maior que ',
         lengthTooLongEnd : ' caracteres',
+        badInt: 'Informe um número inteiro (maior que "0" zero)'
 
     };
     $.validate({

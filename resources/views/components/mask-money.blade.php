@@ -1,0 +1,1 @@
+{{ Html::script('js/mask-money/jquery.maskMoney.js') }}

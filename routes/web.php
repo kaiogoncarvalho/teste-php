@@ -19,5 +19,5 @@ Auth::routes();
 
 Route::get('/home', 'ProductController@index')->name('home');
 Route::get('/products', 'ProductController@index')->name('products');
-
+Route::get('/product', 'ProductController@showCreate');
 

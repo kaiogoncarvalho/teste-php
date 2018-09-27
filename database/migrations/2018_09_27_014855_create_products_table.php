@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('description', 255);
             $table->float('price');
             $table->integer('quantity')->unsigned();
+            $table->boolean('active')->default(true);
             $table->timestampsTz();
             $table->softDeletesTz();
         });
