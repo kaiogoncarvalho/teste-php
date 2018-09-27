@@ -1,3 +1,36 @@
+# Instruções de Instalação:
+
+## Instalar com Docker no Linux
+
+- Criar pasta  `/var/mysql`
+- Acessar a Pasta `docker`
+    - Copiar o arquivo `.env.example` para `.env`
+    - Acessar arquivo `.env`
+        - Na variável `DIR` colocar o diretório do Projeto (Sem a pasta `public`)
+        - Na variável `DIR_MYSQL` colocar `/var/mysql`
+    - Dentro da Pasta `docker` dentro do terminal rodar o seguinte comando:
+        - `docker-composer -p vector up -d`
+- Editar arquivo `/etc/hosts`
+    - Incluir seguinte linha no final `172.85.1.2 teste.vector`      
+- Para Testar se o Docker funcionou basta acessar `teste.vector` pelo navegador, deve ocorrer um erro no Laravel, mas isso é normal
+- Prosseguir com os demais passos exceto a parte **Instalar sem Docker**
+        
+## Instalar sem Docker        
+        
+- Criar o Banco de Dados e Configurar Apache ou Nginx
+- Corrigir a URL da Aplicação `APP_URL` e os dados do Banco de Dados
+
+## Continuação do Passo a Passo
+
+- Executar na pasta raiz os seguinte comandos:
+    - `composer install`
+    - `php artisan key:generate`
+    - `php artisan migrate`
+    - `sudo chmod 777 -R storage/`
+    - Se desejar configurar os dados de e-mail no `.env` para testar o reset de senha
+
+
+
 # Teste para vaga de Analista Desenvolvedor PHP
 
 ## Projeto

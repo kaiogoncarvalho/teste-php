@@ -16,7 +16,7 @@ services:
       - $DIR:/var/www
     image: kaiocarvalhopravaler/php:7.2-apache
     environment:
-      - SITE_HOST=localhost.desenv
+      - SITE_HOST=teste.vector
       - SITE_DOCUMENT_ROOT=/var/www/public
       - VOLUME=/var/www
       - CONTAINER=vector_php
