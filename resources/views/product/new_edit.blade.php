@@ -106,7 +106,13 @@
 
                         <div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}">
                             {{
-                                Form::label('price', trans('product.price'), ['class' => 'col-md-4 control-label'])
+                                Form::label(
+                                    'price',
+                                    trans('product.price'),
+                                    [
+                                        'class'          => 'col-md-4 control-label',
+                                    ]
+                                )
                              }}
 
                             <div class="col-md-6">
@@ -115,9 +121,13 @@
                                        'price',
                                        isset($product->price) ? $product->price : old('price'),
                                        [
-                                           'data-validation'                  => 'required date',
-                                           'class'                            => 'form-control',
-                                           'id'                               => 'end_date',
+                                           'data-validation' => 'required custom',
+                                           'class'           => 'form-control',
+                                           'id'              => 'price',
+                                           'data-thousands'  => '.',
+                                           'data-decimal'    => ',',
+                                           'data-prefix'     => 'R ',
+                                           'data-validation-regexp' => '^R\$ (\d{1,3}\.)*\d{1,3},\d{2}$',
                                        ]
                                    )
 
@@ -155,10 +165,9 @@
 
 @section('footer')
     {{ Html::script('js/moment/moment.min.js') }}
-    {{ Html::style('css/bootstrap-datetimepicker.min.css') }}
-    {{ Html::script('js/datetimepicker/bootstrap-datetimepicker.js') }}
     {{ Html::script('js/moment/locales/pt-br.js') }}
     @include('components.validation')
     @include('components.mask-money')
+    {{ Html::script('js/new_edit.js') }}
 
 @endsection
