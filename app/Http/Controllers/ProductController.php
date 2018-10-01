@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductRequest;
+use App\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -38,5 +40,12 @@ class ProductController extends Controller
     public function showCreate()
     {
         return view('product.new_edit');
+    }
+
+    public function create(ProductRequest $request)
+    {
+        $product =  Product::create($request->all());
+
+        return $product;
     }
 }

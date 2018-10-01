@@ -126,7 +126,7 @@
                                            'id'              => 'price',
                                            'data-thousands'  => '.',
                                            'data-decimal'    => ',',
-                                           'data-prefix'     => 'R ',
+                                           'data-prefix'     => 'R$ ',
                                            'data-validation-regexp' => '^R\$ (\d{1,3}\.)*\d{1,3},\d{2}$',
                                        ]
                                    )

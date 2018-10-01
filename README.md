@@ -7,9 +7,8 @@
     - Copiar o arquivo `.env.example` para `.env`
     - Acessar arquivo `.env`
         - Na variável `DIR` colocar o diretório do Projeto (Sem a pasta `public`)
-        - Na variável `DIR_MYSQL` colocar `/var/mysql`
     - Dentro da Pasta `docker` dentro do terminal rodar o seguinte comando:
-        - `docker-composer -p vector up -d`
+        - `docker-compose -p vector up -d`
 - Editar arquivo `/etc/hosts`
     - Incluir seguinte linha no final `172.85.1.2 teste.vector`      
 - Para Testar se o Docker funcionou basta acessar `teste.vector` pelo navegador, deve ocorrer um erro no Laravel, mas isso é normal
