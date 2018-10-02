@@ -34,5 +34,9 @@ return [
     'price-format'       => 'O campo ":attribute" deve ter o seguinte formato ":format"',
     'created_at'         => 'Criado em',
     'updated_at'         => 'Atualizado em',
-    'actions'            => 'Ações'
+    'actions'            => 'Ações',
+    'previous_quantity'  => 'Quantidade Anterior',
+    'next_quantity'      => 'Quantidade Posterior',
+    'moviment_quantity'  => 'Quantidade Movimentada',
+    'stock_3'            => 'Produtos com estoque em 3',
 ];

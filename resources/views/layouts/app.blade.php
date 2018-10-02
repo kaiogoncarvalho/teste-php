@@ -52,7 +52,8 @@
                             <li>{{ link_to_route('login', trans('common.login')) }}</li>
                             <li>{{ link_to_route('register', trans('common.register')) }}</li>
                         @else
-                            <li>{{ link_to_route('products', trans('common.home')) }}</li>
+                            <li>{{ link_to_route('home', trans('common.home')) }}</li>
+                            <li>{{ link_to_route('products', trans('product.control')) }}</li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>

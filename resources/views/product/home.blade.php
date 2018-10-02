@@ -59,12 +59,7 @@
                 <div class="panel-heading">@lang('product.control')</div>
 
                 <div class="panel-body">
-                    @if (session('alert'))
-                        <div class="alert alert-{{ session('alert.type') }} alert-dismissible" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            {!! session('alert.message') !!}
-                        </div>
-                    @endif
+
                     <table id="example" class="display" cellspacing="0" width="100%">
                         <thead>
                         <tr>

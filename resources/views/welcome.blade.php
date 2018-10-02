@@ -22,7 +22,7 @@
 
         <div class="links">
             @if (Auth::check())
-                {{ link_to_route('products', trans('common.home')) }}
+                {{ link_to_route('home', trans('common.home')) }}
                 {{ link_to_route('products', trans('product.control')) }}
             @else
                 {{ link_to_route('login', trans('common.login')) }}

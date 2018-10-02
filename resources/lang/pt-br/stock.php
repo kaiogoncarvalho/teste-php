@@ -14,5 +14,6 @@ return [
     */
 
     'negative-error' => 'Estoque não pode ser negativo',
+    'movement'       => 'Movimentação de estoque'
 
 ];
