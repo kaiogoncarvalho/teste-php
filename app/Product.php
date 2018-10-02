@@ -15,13 +15,11 @@ class Product extends Model
             'description',
             'price',
             'quantity',
-            'active'
         ];
 
-    protected $dates = [
-      'created_at',
-      'updated_at',
-      'deleted_at'
+    protected $casts = [
+      'created_at' => 'datetime:d/m/Y H:i',
+      'updated_at' => 'datetime:d/m/Y H:i'
     ];
 
     public function setPriceAttribute($value)
@@ -32,5 +30,10 @@ class Product extends Model
             $this->attributes['price'] = (float) preg_replace($patterns, $replaces, $value);
         }
 
+    }
+
+    public function getPriceAttribute()
+    {
+        return 'R$ '.number_format($this->attributes['price'], 2, ',', '.');
     }
 }

@@ -1,8 +1,26 @@
-$(document).ready( function () {
+$(document).ready(function () {
 
-    function filterColumn ( i ) {
-        $('#example').DataTable().column( i ).search(
-            $('#col'+i+'_filter option:selected').val()
+    function format ( d ) {
+        // `d` is the original data object for the row
+        return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+            '<tr>'+
+            '<td>Descrição:</td>'+
+            '<td>'+d.description+'</td>'+
+            '</tr>'+
+            '<tr>'+
+            '<td>Criado em:</td>'+
+            '<td>'+d.created_at+'</td>'+
+            '</tr>'+
+            '<tr>'+
+            '<td>Atualizado em:</td>'+
+            '<td>'+d.updated_at+'</td>'+
+            '</tr>'+
+            '</table>';
+    }
+
+    function filterColumn(i) {
+        $('#example').DataTable().column(i).search(
+            $('#col' + i + '_filter option:selected').val()
         ).draw();
     }
 
@@ -11,7 +29,7 @@ $(document).ready( function () {
         "pageLength": 10,
         "processing": true,
         "serverSide": true,
-        "ajax": "activities",
+        "ajax": "products/datatable",
         "language": {
             "url": "http://cdn.datatables.net/plug-ins/1.10.15/i18n/Portuguese-Brasil.json",
             select: {
@@ -29,75 +47,79 @@ $(document).ready( function () {
                 "defaultContent": ""
             },
             {
+                "className":      'details-control',
+                "orderable":      false,
+                "data":           null,
+                "defaultContent": '<button type="button" class="btn btn-default" value=""><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Detalhes</button>'
+            },
+            {
+              "data" : "id",
+              "name" : "id"
+            },
+            {
                 "data": "name",
-                "name" : "name"
+                "name": "name"
             },
             {
-                "data": "description",
-                "name" : "description"
+                "data": "quantity",
+                "name": "quantity"
             },
             {
-                "data": "start_date",
-                "name" : "start_date"
+                "data": "price",
+                "name": "price"
             },
             {
-                "data": "end_date",
-                "name" : "end_date"
-            },
-            {
-                "data": "status.name",
-                "name" : "status_id"
-            },
-            {
-                "data": "situation_name",
-                "name" : "situation"
+                "name": 'action',
+                "data": null
             }
         ],
-        "rowCallback": function ( row, data ) {
-            if ( data.status_id == "4" ){ $('td', row).css('background-color', '#5cb85c');}
+        "rowCallback": function (row, data) {
+            if (data.quantity <= 3) {
+                $('td', row).css('background-color', '#f5c6cb');
+            }
         },
         select: true,
         dom: 'Bfrtip',
         buttons: [
             {
-                text: '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>',
+                text: '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Criar',
                 className: 'btn btn-success',
-                action: function ( e, dt, node, config ) {
-                    window.location.href = "create";
+                action: function (e, dt, node, config) {
+                    window.location.href = "product";
                 }
             },
             {
-                text: '<span class="glyphicon glyphicon-pencil aria-hidden="true"></span>',
+                text: '<span class="glyphicon glyphicon-pencil aria-hidden="true"></span> Editar',
                 className: 'btn btn-default',
-                action: function ( e, dt, node, config ) {
-                    var linha = table.rows( { selected: true } )[0][0];
+                action: function (e, dt, node, config) {
+                    var linha = table.rows({selected: true})[0][0];
                     var data = table.row(linha).data();
-                    if(linha != undefined) {
-                        window.location.href = "edit/" + data.id;
+                    if (linha != undefined) {
+                        window.location.href = "product/" + data.id;
                     }
-                    else{
+                    else {
                         $.alert({
-                            title: 'Escolha uma atividade!',
-                            content: 'Nenhuma Atividade foi escolhida!',
+                            title: 'Escolha um Produto!',
+                            content: 'Nenhum Produto foi escolhido!',
                         });
                     }
                 }
             },
             {
-                text: '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>',
+                text: '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Deletar',
                 className: 'btn btn-danger',
-                action: function ( e, dt, node, config ) {
-                    var linha = table.rows( { selected: true } )[0][0];
+                action: function (e, dt, node, config) {
+                    var linha = table.rows({selected: true})[0][0];
                     var data = table.row(linha).data();
-                    if(linha != undefined) {
+                    if (linha != undefined) {
                         $.confirm({
-                            title: 'Exclusão de Atividade',
-                            content: 'Realmente deseja excluir esta atividade?',
+                            title: 'Exclusão de Produto',
+                            content: 'Realmente deseja excluir esta produto?',
                             type: 'red',
                             typeAnimated: true,
                             buttons: {
                                 confirmar: function () {
-                                    window.location.href = "delete/"+data.id;
+                                    window.location.href = "product/delete/" + data.id;
                                 },
                                 cancelar: function () {
 
@@ -105,10 +127,10 @@ $(document).ready( function () {
                             }
                         });
                     }
-                    else{
+                    else {
                         $.alert({
-                            title: 'Escolha uma atividade!',
-                            content: 'Nenhuma Atividade foi escolhida!',
+                            title: 'Escolha um Produto!',
+                            content: 'Nenhuma Produto foi escolhido!',
                         });
                     }
 
@@ -116,20 +138,54 @@ $(document).ready( function () {
                 }
             }
         ],
-        columnDefs: [ {
-            orderable: false,
-            className: 'select-checkbox',
-            targets:   0
-        } ],
-        select: {
-            style:    'os',
-            selector: 'td:first-child'
-        },
-        order: [[ 1, 'asc' ]]
-    });
+        columnDefs: [
+            {
+                orderable: false,
+                className: 'select-checkbox',
+                targets:   0
+            },
+            {
+                orderable: false,
+                "targets": -1,
+                "data": null,
+                "render": function ( data, type, row ) {
+                    var dropdown =  "<div class='btn-group'>"
+                        + "<button type='button' class='btn btn-info dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Ações <span class='caret'></span></button>"
+                        +  "<ul class='dropdown-menu'>"
+                        + "<li><a href='stock?product="+row.id+"&quantity=1'>Aumentar Estoque </a></li>"
+                        + "<li><a href='stock?product="+row.id+"&quantity=-1'>Diminuir Estoque</a></li>"
+                        + "</ul>"
+                        + "</div>";
+                    return dropdown;
+                },
+
+    }
+],
+    select: {
+        style:    'os',
+            selector
+    :
+        'td:first-child'
+    }
+,
+    order: [[2, 'asc'], [4, 'asc']]
+});
 
 
-    $('select.column_filter').on( 'change', function () {
-        filterColumn( $(this).parents('tr').attr('data-column') );
+    $('#example tbody').on('click', 'td.details-control', function () {
+        var tr = $(this).closest('tr');
+        var row = table.row( tr );
+
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            // Open this row
+            row.child( format(row.data()) ).show();
+            tr.addClass('shown');
+        }
     } );
+
 });

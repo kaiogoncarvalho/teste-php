@@ -17,8 +17,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'ProductController@index')->name('home');
 Route::get('/products', 'ProductController@index')->name('products');
+Route::get('/products/datatable', 'ProductController@datatable');
+
+Route::get('/product/{id}', 'ProductController@showEdit');
 Route::get('/product', 'ProductController@showCreate');
 Route::post('/product', 'ProductController@create');
+Route::put('/product/{id}', 'ProductController@edit');
+Route::get('/product/delete/{id}', 'ProductController@delete');
+
+Route::get('/stock', 'StockController@create');
+
+
 

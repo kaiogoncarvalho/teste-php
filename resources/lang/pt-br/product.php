@@ -23,13 +23,16 @@ return [
     'control'            => 'Controle de Produtos',
     'filter'             => 'Filtrar',
     'column'             => 'Coluna',
-    'delete_success'     => ' < strong> Deletada com Sucesso! </strong > Atividade foi deletada com sucesso',
-    'edit_success'       => ' < strong> Alterada com Sucesso! </strong > Atividade foi alterada com sucesso',
-    'create_success'     => ' < strong> Criada com Sucesso! </strong > Atividade foi criada com sucesso',
+    'delete_success'     => ' <strong> Deletado com Sucesso! </strong > Produto foi deletado com sucesso',
+    'edit_success'       => ' <strong> Alterado com Sucesso! </strong > Produto foi alterado com sucesso',
+    'create_success'     => ' <strong> Criado com Sucesso! </strong > Produto foi criado com sucesso',
     'back'               => 'Voltar',
     'enable'             => 'Ativo',
     'disable'            => 'Inativo',
     'placeHolder_select' => '-- Selecione-- ',
-
-
+    'active'             => 'Ativo',
+    'price-format'       => 'O campo ":attribute" deve ter o seguinte formato ":format"',
+    'created_at'         => 'Criado em',
+    'updated_at'         => 'Atualizado em',
+    'actions'            => 'Ações'
 ];

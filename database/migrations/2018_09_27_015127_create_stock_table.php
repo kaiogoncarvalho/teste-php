@@ -19,7 +19,6 @@ class CreateStockTable extends Migration
             $table->integer('quantity');
             $table->integer('next_quantity');
             $table->integer('previous_quantity');
-
             $table->foreign('product_id')->references('id')->on('products');
 
             $table->timestampsTz();

@@ -10,5 +10,5 @@ return [
     'email_address'          => 'Endereço de E-mail',
     'confirm_password'       => 'Confirmar Senha',
     'system-control-product' => 'Sistema de Controle de Produtos',
-
+    'id'                     => 'ID'
 ];

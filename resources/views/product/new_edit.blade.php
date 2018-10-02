@@ -22,7 +22,7 @@
                         @endif
                     </div>
                     <div class="panel-body">
-                        {{ Form::open(['url' => 'product', 'method' => 'POST', 'role' => 'form', 'class' => 'form-horizontal', 'id' => 'form-product']) }}
+                        {{ Form::open(['url' => isset($product) ? "product/{$product->id}" : 'product', 'method' => $method, 'role' => 'form', 'class' => 'form-horizontal', 'id' => 'form-product']) }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             {{
@@ -77,7 +77,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('start_date') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('quantity') ? ' has-error' : '' }}">
                             {{
                                 Form::label('quantity', trans('product.quantity'), ['class' => 'col-md-4 control-label'])
                              }}
@@ -98,7 +98,7 @@
 
                                 @if ($errors->has('quantity'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('price') }}</strong>
+                                        <strong>{{ $errors->first('quantity') }}</strong>
                                     </span>
                                 @endif
                             </div>
